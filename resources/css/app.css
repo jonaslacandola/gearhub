@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        @apply text-zinc-800 font-mono;
+    }
+
+    label {
+        @apply font-semibold;
+    }
+
+    textarea,
+    input {
+        @apply bg-zinc-200 p-2 rounded-sm placeholder:text-zinc-400 outline-1 outline-offset-1 outline-zinc-600 focus:outline;
+    }
+}
