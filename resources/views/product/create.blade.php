@@ -12,8 +12,16 @@
         </a>
 
         <div class="w-3/4 grid grid-cols-2 items-center gap-10 p-2 mx-auto">
-            <div class="h-full flex items-center justify-center w-full bg-zinc-300 rounded-sm" id="preview-container">
+            <div class="relative h-full flex items-center justify-center w-full bg-zinc-300 rounded-sm" id="preview-container">
                 <p class="text-4xl text-zinc-400">Preview</p>
+                <div class="absolute p-2 w-full h-full flex items-center justify-between">
+                    <button id="btn-left">
+                        <i data-feather="chevron-left"></i>
+                    </button>
+                    <button id="btn-right">
+                        <i data-feather="chevron-right"></i>
+                    </button>
+                </div>
             </div>
             <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data" class="w-[80%] flex flex-col gap-4">
                 @csrf

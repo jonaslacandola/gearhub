@@ -20,11 +20,38 @@
         </ul>
     </nav>
 
-    <section class="w-3/4 mx-auto flex gap-4">
+    <section class="w-3/4 mx-auto flex flex-wrap gap-4 ">
         @forelse ($products as $product) 
             <x-product-card :product="$product"/>
         @empty
             <p class="text-center text-xl m-8 text-zinc-400">There are no products available</p>
         @endforelse
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide')
+            
+            slides.forEach((slide) => {
+                const children = Array.from(slide.children)
+                const indexes = children.length
+
+                // for(let i = 0; i < indexes; i++) {
+                //     const imgWidth = Number(children[i].getBoundingClientRect().width)
+
+                //     setTimeout(() => {
+                //         children[i].style.transform = `translateX(-${i * imgWidth}px)`
+                //     }, 3000 * i)
+                // }
+
+                children.forEach((img, idx) => {
+                    const imgWidth = Number(img.getBoundingClientRect().width)
+
+                    setTimeout(() => {
+                        img.style.transform = `translateX(-${idx * imgWidth}px)`
+                    }, 3000 * idx)
+                })
+            })
+        })
+    </script>
 @endsection

@@ -4,7 +4,7 @@
 
 @layer base {
     * {
-        @apply text-zinc-800 font-mono;
+        @apply text-zinc-800 font-mono transition-all duration-300;
     }
 
     label {

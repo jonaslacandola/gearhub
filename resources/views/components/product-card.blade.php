@@ -1,14 +1,22 @@
-<div class="flex flex-col h-[460px] w-[300px] outline outline-1 outline-zinc-800 rounded-sm my-8">
-    <div class="w-full flex overflow-hidden">
+<div class="flex flex-col h-auto w-[300px] rounded-sm my-8">
+    <div class="relative slide w-full flex overflow-hidden">
         @foreach(json_decode($product->images) as $imgURL)
-            <img src="{{asset('storage/' . $imgURL)}}" alt="{{$product->name}}" class="aspect-square object-cover">
+            <img src="{{asset('storage/' . $imgURL)}}" alt="{{$product->name}}" class="aspect-square object-cover rounded-sm">
         @endforeach
     </div>
-    <div class="p-2 flex flex-col gap-2">
+    <div class="flex flex-col bg-white py-4">
+        <h1 class="text-lg font-semibold">{{$product->name}}</h1>
+        <p class="text-zinc-600">{{$product->description}}</p>
         <div class="flex justify-between items-center">
-            <h1 class="text-xl font-semibold">{{$product->name}}</h1>
-            <p class="font-medium">${{$product->price}}</p>
+            <p class="font-semibold">PHP {{$product->price}}</p>
+            <div class="flex">
+                <button class="hover:bg-zinc-200 rounded-full p-2">
+                    <i data-feather="trash" class="w-5 h-5"></i>
+                </button>
+                <a href="{{route('product.show', $product->id)}}" class="hover:bg-zinc-200 rounded-full p-2">
+                    <i data-feather="info" class="w-5 h-5"></i>
+                </a>
+            </div>
         </div>
-        <p>{{$product->description}}</p>
     </div>
 </div>  
