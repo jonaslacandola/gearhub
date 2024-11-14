@@ -1,7 +1,7 @@
 @extends('product.layout')
 
 @section('content')
-    <nav class="py-4 px-8 flex justify-between">
+    <nav class="py-4 px-8 flex justify-between border-b-2 border-zinc-200">
         <h1 class="flex gap-2 items-center text-xl font-semibold">
             <i data-feather="copy"></i>
             <span>Product</span>
@@ -19,4 +19,12 @@
             </li>
         </ul>
     </nav>
+
+    <section class="w-3/4 mx-auto flex gap-4">
+        @forelse ($products as $product) 
+            <x-product-card :product="$product"/>
+        @empty
+            <p class="text-center text-xl m-8 text-zinc-400">There are no products available</p>
+        @endforelse
+    </section>
 @endsection
