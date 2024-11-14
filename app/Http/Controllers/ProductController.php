@@ -17,8 +17,6 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        Log::info('products', [$products]);
-
         return view('product.index', compact('products'));
     }
 
