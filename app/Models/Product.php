@@ -10,6 +10,10 @@ class Product extends Model
     use HasUuids;
 
     protected $fillable = [
-        "name", "description", "price", "images"
+        "name", "user_id", "description", "price", "images"
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -16,7 +16,6 @@ class ProductCard extends Component
      */
     public function __construct($product)
     {   
-        Log::info('asdasd', [$product]);
         $this->product = $product;
     }
 

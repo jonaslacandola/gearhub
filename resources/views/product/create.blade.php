@@ -34,7 +34,7 @@
                 <label for="description">Description</label>
                 <div class="flex flex-col gap-2 bg-zinc-200 rounded-sm outline-1 outline-offset-1 outline-zinc-600 focus-within:outline">
                     <textarea name="description" id="description" placeholder="Description..." class="h-36 resize-none outline-none"></textarea>
-                    <button type="submit" class="self-end px-6 py-4 bg-zinc-600 text-white rounded-sm m-2">Create</button>
+                    <button type="submit" class="self-end px-6 py-4 bg-purple-600 text-white rounded-sm m-2">Create</button>
                 </div>
             </form>
         </div>
