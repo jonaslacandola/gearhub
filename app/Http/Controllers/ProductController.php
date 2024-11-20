@@ -3,23 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Error;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $products = Product::all();
-
-        return view('product.index', compact('products'));
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -45,20 +35,23 @@ class ProductController extends Controller
             $imagesPath = [];
 
             if ($request->hasFile('images')) {
+                $imgDIR = $validated["name"] . "-" . time();
+
                 foreach ($request->file('images') as $image) {
-                    $path = $image->storeAs('products_images', time() . "-" . $image->getClientOriginalName() ,'public');
+                    $path = $image->storeAs($imgDIR, time() . "-" . $image->getClientOriginalName() ,'public');
                     $imagesPath[] = $path;
                 }
             }
 
             Product::create([
+                "userId" => Auth::id(),
                 "name" => $validated["name"],
                 "description" => $validated["description"],
                 "price" => $validated["price"],
                 "images" => json_encode($imagesPath)
             ]);
 
-            return redirect()->route('product.index')->with('success', "Product has been created");
+            return redirect()->route('dashboard')->with('success', "Product " . strtoupper($validated["name"]) . " has been created");
 
         } catch (Exception $error) {
             Log::error('create_error:', [$error->getMessage()]);

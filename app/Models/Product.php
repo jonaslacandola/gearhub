@@ -10,7 +10,7 @@ class Product extends Model
     use HasUuids;
 
     protected $fillable = [
-        "name", "user_id", "description", "price", "images"
+        "userId", "name", "description", "price", "images"
     ];
 
     public function user() {

@@ -1,21 +1,16 @@
-import defaultTheme from "tailwindcss/defaultTheme";
-
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
-        "./resources/**/*.blade.php",
-        "./resources/**/*.js",
-        "./resources/**/*.vue",
+        "./resources/views/**/*.blade.php",
     ],
+
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Albert Sans, sans-serif"],
-                mono: ["Source Code Pro, monospace"],
+                sans: ["Albert Sans, sans"],
             },
         },
     },
-    plugins: [],
 };

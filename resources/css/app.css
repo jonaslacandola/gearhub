@@ -4,7 +4,7 @@
 
 @layer base {
     * {
-        @apply text-zinc-800 font-mono transition-all duration-300;
+        @apply text-zinc-800 transition-all duration-300;
     }
 
     label {
@@ -13,6 +13,6 @@
 
     textarea,
     input {
-        @apply bg-zinc-200 p-2 rounded-sm placeholder:text-zinc-400 outline-1 outline-offset-1 outline-zinc-600 focus:outline;
+        @apply bg-zinc-100 py-2 px-4 rounded-md placeholder:text-zinc-300 outline-2 outline-offset-2 outline-purple-600 focus:outline;
     }
 }

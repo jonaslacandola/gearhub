@@ -1,18 +1,16 @@
-<div class="flex flex-col h-auto w-[260px] rounded-sm my-8">
-    <div class="relative h-full w-full flex overflow-hidden">
+<div class="swiper flex flex-col gap-2 h-auto w-[260px] rounded-2xl">
+    <!-- Swiper container -->
+    <div class="swiper-wrapper">
         @foreach(json_decode($product->images) as $imgURL)
-            <img src="{{asset('storage/' . $imgURL)}}" alt="{{$product->name}}" class="aspect-square object-cover rounded-md">
+            <!-- Each image must be inside a "swiper-slide" -->
+            <div class="swiper-slide">
+                <img src="{{ asset('storage/' . $imgURL) }}" alt="{{ $product->name }}" class="aspect-square object-cover rounded-2xl">
+            </div>
         @endforeach
     </div>
-    <div class="flex flex-col bg-white py-4">
-        <h1 class="text-lg font-semibold">{{$product->name}}</h1>
-        <p class="text-zinc-600 break-words line-clamp-2">{{$product->description}}</p>
-        <div class="flex justify-between items-center">
-            <p class="font-semibold">Price</p>
-            <p class="font-semibold text-lg text-purple-600">PHP {{$product->price}}</p>
-        </div>
+    <div class="flex flex-col gap-2 py-2">
+        <h1 class="text-xl font-semibold">{{ $product->name }}</h1>
+        <p class="text-slate-700 break-words line-clamp-2">{{ $product->description }}</p>
+        <p class="font-semibold text-purple-600">PHP {{ $product->price }}</p>
     </div>
-    <!-- <a href="{{route('product.show', $product->id)}}" class="absolute stroke stroke-purple-600 top-0 right-0 rounded-full p-2">
-        <i data-feather="info" class="w-5 h-5"></i>
-    </a> -->
-</div>  
+</div>
