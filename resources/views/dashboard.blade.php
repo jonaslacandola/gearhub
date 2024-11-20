@@ -6,16 +6,16 @@
             </h2>
 
             <ul class="flex items-center gap-4">
-            <li>
-                <form action="" class="flex">
-                    <input type="search" name="" id="" placeholder="Search product" class="rounded-s-md">
-                    <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-r-md">Search</button>
-                </form>
-            </li>
-            <li>
-                <a href="{{route('product.create')}}" class="px-5 py-3 outline outline-1 text-sm outline-purple-600 text-purple-600 rounded-md">Create Product</a>
-            </li>
-        </ul>
+                <li>
+                    <form action="" class="flex">
+                        <input type="search" name="" id="" placeholder="Search product" class="rounded-s-md">
+                        <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-r-md">Search</button>
+                    </form>
+                </li>
+                <li>
+                    <a href="{{route('product.create')}}" class="px-5 py-3 outline outline-1 text-sm outline-purple-600 text-purple-600 rounded-md">Create Product</a>
+                </li>
+            </ul>
         </div>
     </x-slot>
 

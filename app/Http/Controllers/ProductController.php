@@ -65,7 +65,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        Log::info('', [$product]);
+        
+        if (Auth::id() === $product->userId)
+            return view('product.show', compact('product'));
+
+        return redirect()->route('dashboard')->with('error', 'Product does not exist!');
     }
 
     /**
