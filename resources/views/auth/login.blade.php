@@ -2,8 +2,8 @@
     <x-slot name="sideboard">
         <div class="absolute -top-12 rounded-3xl flex flex-col shadow-xl left-20 bg-background-light w-3/4 h-[86vh] overflow-hidden">
             <div class="h-full p-8">
-                <x-application-logo class="mb-4 text-4xl"/>
-                <h1 class="text-xl font-medium mb-4">Welcome Back!</h1>
+                <x-application-logo class="text-3xl lg:text-4xl"/>
+                <h1 class="text-xl font-medium ">Welcome Back!</h1>
                 <p class="text-zinc-600">A one ship solution for all offers</p>
                 <p class="text-zinc-600">Find everything in less price</p>
             </div>
@@ -14,12 +14,12 @@
     </x-slot>
 
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth-session-status class="" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}" class="w-3/4 rounded-xl flex flex-col gap-4 ">
         @csrf
         <!-- Login Header Title -->
-        <h1 class="font-medium text-xl mb-4">
+        <h1 class="font-medium text-xl">
             {{ __('Login') }}
         </h1>
 
@@ -29,18 +29,18 @@
             <x-text-input id="email" class="w-full" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus autocomplete="username" >
                 <i data-feather="user" class="w-[18px] h-[18px]"></i>
             </x-text-input>
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-error :messages="$errors->get('email')" class="" />
         </div>
 
         <!-- Password -->
         <div>
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" placeholder="Password" required autocomplete="current-password" >
+            <x-text-input id="password" class="block  w-full" type="password" name="password" placeholder="Password" required autocomplete="current-password" >
                 <i data-feather="lock" class="w-[18px] h-[18px]"></i>
             </x-text-input>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-error :messages="$errors->get('password')" class="" />
         </div>
 
         <!-- Remember Me & Forgot Password -->
@@ -57,14 +57,14 @@
             @endif
         </div>
 
-        <div class="mt-4 mb-8">
+        <div class=" ">
             <x-primary-button class="w-full">
                 {{ __('Login')}}
             </x-primary-button>
         </div>
 
         <div class="flex justify-center">
-            <a href="{{ route('register') }}" class="text-center mb-4 text-sm rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange">
+            <a href="{{ route('register') }}" class="text-center  text-sm rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange">
                 <span class="text-zinc-500">New User?</span>
                 <span class="text-primary-orange">Create an Account</span>
             </a>
