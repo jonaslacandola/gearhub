@@ -7,8 +7,8 @@
 
             <ul class="flex items-center gap-4">
                 <li>
-                    <form action="" class="flex">
-                        <input type="search" name="" id="" placeholder="Search product" class="rounded-s-md">
+                    <form action="{{ route('dashboard') }}" method="get" class="flex">
+                        <input type="search" name="search" id="search" placeholder="Search product" class="rounded-s-md">
                         <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-r-md">Search</button>
                     </form>
                 </li>

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->foreignUuid("userId")->nullable(false)->constrained('users')->onDelete('cascade');
             $table->string("name");
             $table->text("description");
             $table->decimal("price", 10, 2);

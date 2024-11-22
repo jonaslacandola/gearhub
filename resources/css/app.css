@@ -4,15 +4,6 @@
 
 @layer base {
     * {
-        @apply text-zinc-800 transition-all duration-300;
-    }
-
-    label {
-        @apply font-semibold;
-    }
-
-    textarea,
-    input {
-        @apply bg-zinc-100 py-2 px-4 rounded-md placeholder:text-zinc-300 outline-2 outline-offset-2 outline-purple-600 focus:outline;
+        @apply text-secondary-black transition-all duration-300;
     }
 }
