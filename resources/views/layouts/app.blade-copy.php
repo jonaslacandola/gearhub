@@ -12,20 +12,23 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="w-full h-screen flex items-center bg-accent-gray antialiased">
-        <div class="w-3/4 h-3/4 shadow-2xl rounded-3xl mx-auto flex flex-cols items-center gap-10 bg-background-light">
-            @isset($sideboard)
-                <div class="relative h-full w-full rounded-s-3xl bg-primary-orange">
-                    {{ $sideboard }}
-                </div>
-            @endisset
-            <div class="flex justify-center w-full ">
-                {{ $slot }}
-            </div>
-        </div>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen">
+            @include('layouts.navigation')
 
-        <script>
-            feather.replace();
-        </script>
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
     </body>
 </html>
