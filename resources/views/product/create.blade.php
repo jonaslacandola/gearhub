@@ -11,16 +11,16 @@
         @endif
 
         <div class="w-3/4 grid grid-cols-2 items-center gap-10 mt-8 p-2 mx-auto">
-            <div class="swiper relative h-full w-full flex items-center justify-center bg-gray-100 rounded-md" id="preview-container">
-                <div class="swiper-wrapper h-full w-full flex items-center justify-center">
-                    <p id="preview" class="text-4xl text-gray-200">Preview</p>
+            <div class="swiper relative w-full h-full max-h-[500px] max-w-[500px] flex bg-gray-100 rounded-md overflow-hidden">
+                <div class="swiper-wrapper flex items-center">
+                    <p id="preview-placeholder" class="w-full text-4xl text-center text-gray-200">Preview</p>
                 </div>
 
                 <div class="absolute p-2 w-full h-full flex items-center justify-between z-10">
-                    <button id="btn-left">
+                    <button id="btn-prev" class="bg-white rounded-full p-2">
                         <i data-feather="chevron-left"></i> 
                     </button>
-                    <button id="btn-right">
+                    <button id="btn-next" class="bg-white rounded-full p-2">
                         <i data-feather="chevron-right"></i>
                     </button>
                 </div>
@@ -44,15 +44,15 @@
 
     <script>
         let swiperInstance; // Store Swiper instance for reuse
-
-        function handleFileUpload(event) {
-            const swiper = document.querySelector('.swiper');
-            const swiperWrapper = document.querySelector('.swiper-wrapper');
+        
+         window.handleFileUpload = function (event) {
+            const swiper = document.querySelector('.swiper')
+            const swiperWrapper = document.querySelector('.swiper-wrapper')
             const files = Array.from(event.target.files);
 
             if (!files.length) return;
 
-            // Remove existing slides and preview text
+            // Reset the slider
             swiperWrapper.innerHTML = '';
 
             // Add new slides
@@ -62,19 +62,18 @@
                 fileReader.readAsDataURL(file);
 
                 fileReader.onload = (img) => {
-                    const imgEl = document.createElement('img');
-                    imgEl.src = img.target.result;
-                    imgEl.classList.add('aspect-[1/1]', 'object-cover');
+                    const imgElement = document.createElement('img');
+                    imgElement.src = img.target.result;
+                    imgElement.classList.add('aspect-[1/1]', 'object-cover', 'object-center');
 
                     const swiperSlide = document.createElement('div');
                     swiperSlide.classList.add('swiper-slide');
-                    swiperSlide.appendChild(imgEl);
+                    swiperSlide.appendChild(imgElement);
 
                     swiperWrapper.appendChild(swiperSlide);
                 };
             });
 
-            // Reinitialize Swiper after slides are added
             setTimeout(() => {
                 if (swiperInstance) swiperInstance.destroy(); // Destroy previous instance
 
@@ -86,8 +85,8 @@
                     },
                     slidesPerView: 1,
                     navigation: {
-                        nextEl: '#btn-right',
-                        prevEl: '#btn-left',
+                        nextEl: '#btn-next',
+                        prevEl: '#btn-prev',
                     },
                 });
             }, 100);
