@@ -7,17 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('feed');
-});
+Route::get('/', function (Request $request) {
+    $search = $request->input('search');
+    $products = Product::where('name', 'like', "%$search%")->get();
+    
+    return view('feed', compact('products'));
+})->name('feed');
 
 Route::resource('product', ProductController::class)->middleware(['auth', 'verified']);
 
-Route::get('/dashboard', function (Request $request) {
-    $search = $request->input('search');
-    $products = Product::where('name', 'like', "%$search%")->get();
+Route::get('/dashboard', function () {
 
-    return view('dashboard', compact('products'));
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
