@@ -9,15 +9,21 @@
         @endforeach
     </div>
     <div class="w-full flex flex-col items-center gap-1 p-4">
-        <h1 class="text-lg text-center font-semibold">{{ $product->name }}</h1>
-        <p class="text-center text-zinc-600 text-sm break-words line-clamp-2">{{ $product->description }}</p>
-        <p class="font-semibold text-center">$ {{ $product->price }}</p>
+        <h1 class="text-center text-lg font-semibold">{{ $product->name }}</h1>
+        <p class="text-center text-zinc-600 text-[12px] break-words line-clamp-2">{{ $product->description }}</p>
+        <p class="font-medium text-center">${{ $product->price }}</p>
     </div>
     <div>
-        <form action="">
-            <button type="submit" class="text-white text-sm text-center w-full bg-primary-orange p-4">
+        <form action="{{ route('cart.store', ['productId' => $product->id, 'quantity' => 1]) }}" method="post">
+            @csrf
+            <button type="submit" class="text-white text-sm text-center w-full bg-primary-orange p-4 active:bg-amber-700">
                {{ __('Add to cart') }}
             </button>
         </form>
+    </div>
+    <div class="absolute top-2 right-2 z-10">
+        <button class="p-2 rounded-full bg-background-light active:bg-primary-orange">
+            <i data-feather="heart" class="w-[16px] h-[16px] stroke-primary-orange"></i>
+        </button>
     </div>
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Product;
@@ -15,6 +16,8 @@ Route::get('/', function (Request $request) {
 })->name('feed');
 
 Route::resource('product', ProductController::class)->middleware(['auth', 'verified']);
+
+Route::resource('cart', CartController::class)->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
 

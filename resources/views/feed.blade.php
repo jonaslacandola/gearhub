@@ -1,6 +1,6 @@
 <x-app-layout>
     @if (count($products))
-        <div class="flex ">
+        <div class="flex">
             @foreach ($products as $product) 
                 <x-product-card :product="$product"/>
             @endforeach

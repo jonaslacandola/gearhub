@@ -10,7 +10,11 @@ class Product extends Model
     use HasUuids;
 
     protected $fillable = [
-        "name", "description", "price", "images"
+        'name', 'description', 'price', 'images'
     ];
+
+    public function carts() {
+        return $this->belongsToMany(Cart::class, 'cart_product', 'productId', 'cartId')->withPivot('quantity');
+    }
 
 }
