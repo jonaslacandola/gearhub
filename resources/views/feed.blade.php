@@ -1,11 +1,11 @@
 <x-app-layout>
-    @if (count($products))
-        <div class="flex flex-wrap gap-4">
-            @foreach ($products as $product) 
-                <x-product-card :product="$product"/>
-            @endforeach
-        </div>
-    @endif
+    <div class="flex flex-wrap gap-4">
+        @forelse ($products as $product) 
+            <x-product-card :product="$product"/>
+        @empty
+            <p class="w-full text-center text-accent-gray text-lg">There are no products available 🥲</p>
+        @endforelse
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

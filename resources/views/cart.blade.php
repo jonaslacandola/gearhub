@@ -4,28 +4,28 @@
         @isset($products)
         <div class="flex flex-col gap-4">
             @forelse($products as $product) 
-            <div class="p-4 overflow-hidden flex flex-col gap-2 rounded-xl shadow">
-                <h1 class="text-lg font-semibold">{{ $product->name }}</h1>
-                <div class="flex gap-4">
-                    <img src="{{ asset('storage/' . json_decode($product->images)[0]) }}" alt="{{ $product->name . ' ' . $product->description }}" class="aspect-square object-cover rounded-md w-24 h-24">
-                    <div class="flex flex-col gap-2 w-3/4 line-clamp-2">
-                        <p class="text-sm text-zinc-600">{{ $product->description }}</p>
-                        <p class="font-medium">
-                            <span class="text-primary-orange">
-                                ${{ $product->price }} 
-                            </span>
-                            <span>
-                                x 
-                            </span>
-                            <span>
-                                {{ $product->pivot->quantity }}
-                            </span>
-                        </p>
+                <div class="p-4 overflow-hidden flex flex-col gap-2 rounded-xl shadow">
+                    <h1 class="text-lg font-semibold">{{ $product->name }}</h1>
+                    <div class="flex gap-4">
+                        <img src="{{ asset('storage/' . json_decode($product->images)[0]) }}" alt="{{ $product->name . ' ' . $product->description }}" class="aspect-square object-cover rounded-md w-24 h-24">
+                        <div class="flex flex-col gap-2 w-3/4 line-clamp-2">
+                            <p class="text-sm text-zinc-600">{{ $product->description }}</p>
+                            <p class="font-medium">
+                                <span class="text-primary-orange">
+                                    ${{ $product->price }} 
+                                </span>
+                                <span>
+                                    x 
+                                </span>
+                                <span>
+                                    {{ $product->pivot->quantity }}
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
             @empty 
-            
+                <p class="w-full text-center text-accent-gray text-lg">No items in cart? Start shopping now! 😃</p>
             @endforelse
         </div>
         @endisset
