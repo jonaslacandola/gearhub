@@ -1,6 +1,6 @@
 <x-app-layout>
     @if (count($products))
-        <div class="flex">
+        <div class="flex flex-wrap gap-4">
             @foreach ($products as $product) 
                 <x-product-card :product="$product"/>
             @endforeach
@@ -20,6 +20,7 @@
                 },
                 slidesPerView: 1, // Show one slide at a time
                 spaceBetween: 10, // Add space between slides
+                centeredSlides: false,
             });
         });
     });

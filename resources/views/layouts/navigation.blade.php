@@ -1,4 +1,4 @@
-<nav class="w-full p-4 bg-background-light border-b border-accent-gray shadow-md">
+<nav class="w-full sticky top-0 p-4 bg-background-light border-b border-accent-gray shadow-md z-50">
     <ul class="flex justify-between items-center gap-8 max-w-[85%] mx-auto">
         <li>
            <a href="{{ route('feed') }}">
@@ -20,8 +20,8 @@
         </li>
         <li>
             <div class="flex flex-cols items-center gap-2">
-                <x-nav-icon-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" icon="bell" />
-                <x-nav-icon-link :href="route('dashboard')" :active="request()->routeIs('')" icon="heart" />
+                <x-nav-icon-link icon="bell" />
+                <x-nav-icon-link icon="heart" />
                 <x-nav-icon-link :href="route('cart.index')" :active="request()->routeIs('cart.index')" icon="shopping-cart" :count="$itemsInCart" />
             </div>
         </li>

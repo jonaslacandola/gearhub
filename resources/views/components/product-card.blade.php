@@ -1,4 +1,4 @@
-<div class="swiper relative flex flex-col h-auto w-[230px] rounded-xl shadow">
+<div class="swiper relative flex flex-col h-auto w-[230px] rounded-xl shadow bg-background-light">
     <!-- Swiper container -->
     <div class="swiper-wrapper">
         @foreach(json_decode($product->images) as $imgURL)
@@ -10,7 +10,7 @@
     </div>
     <div class="w-full flex flex-col items-center gap-1 p-4">
         <h1 class="text-center text-lg font-semibold">{{ $product->name }}</h1>
-        <p class="text-center text-zinc-600 text-[12px] break-words line-clamp-2">{{ $product->description }}</p>
+        <p class="text-center text-zinc-600 text-[12px] break-words line-clamp-2 w-[90%]">{{ $product->description }}</p>
         <p class="font-medium text-center">${{ $product->price }}</p>
     </div>
     <div>

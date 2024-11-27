@@ -17,3 +17,8 @@
         @apply stroke-secondary-black;
     }
 }
+
+.swiper,
+.swiper-container {
+    margin: 0 !important;
+}
