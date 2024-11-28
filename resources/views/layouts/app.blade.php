@@ -5,26 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'OfferHub') }}</title>
 
         <x-includes/>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="w-full h-screen bg-accent-gray antialiased">
-            <nav class="w-full flex items-center p-4 bg-white shadow-md">
-                <x-application-logo class="text-2xl pt-2"/>
+    <body class="w-full h-screen bg-background-light antialiased">
+            @include('layouts.navigation')
 
-                <div class="">
-                    <x-text-input></x-text-input>
-                    <div></div>
-                </div>
-
-
-            </nav>
-
-            <main>
+            <main class="max-w-[75%] mx-auto py-10 flex flex-col gap-16">
                 {{ $slot }}
             </main>
 

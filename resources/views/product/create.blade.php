@@ -11,32 +11,40 @@
         @endif
 
         <div class="w-3/4 grid grid-cols-2 items-center gap-10 mt-8 p-2 mx-auto">
-            <div class="swiper relative h-full w-full flex items-center justify-center bg-gray-100 rounded-md" id="preview-container">
-                <div class="swiper-wrapper h-full w-full flex items-center justify-center">
-                    <p id="preview" class="text-4xl text-gray-200">Preview</p>
+            <div class="swiper relative w-full h-full max-h-[400px] flex bg-accent-gray rounded-md overflow-hidden">
+                <div class="swiper-wrapper flex items-center">
+                    <p id="preview-placeholder" class="w-full font-light text-4xl text-center text-zinc-300">Preview</p>
                 </div>
 
                 <div class="absolute p-2 w-full h-full flex items-center justify-between z-10">
-                    <button id="btn-left">
-                        <i data-feather="chevron-left"></i> 
+                    <button id="btn-prev" class="bg-primary-orange rounded-full p-2 active:bg-amber-700">
+                        <i data-feather="chevron-left" class="w-[18px] h-[18px] stroke-white"></i> 
                     </button>
-                    <button id="btn-right">
-                        <i data-feather="chevron-right"></i>
+                    <button id="btn-next" class="bg-primary-orange rounded-full p-2 active:bg-amber-700">
+                        <i data-feather="chevron-right" class="w-[18px] h-[18px] stroke-white"></i>
                     </button>
                 </div>
             </div>
-            <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data" class="w-[80%] flex flex-col gap-4">
+
+            <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data" class="w-[80%] flex flex-col gap-2">
                 @csrf
-                <label for="name">Product</label>
-                <input type="text" name="name" id="name" placeholder="Product">
-                <label for="Price">Price</label>
-                <input type="number" name="price" id="price" placeholder="Price">
-                <label for="images">Images</label>
-                <input type="file" name="images[]" id="images" onchange="handleFileUpload(event)" multiple>
-                <label for="description">Description</label>
-                <div class="flex flex-col bg-zinc-100 rounded-md outline-2 outline-purple-600 focus-within:outline">
-                    <textarea name="description" id="description" placeholder="Description..." class="h-36 resize-none outline-none focus"></textarea>
-                    <button type="submit" class="self-end px-6 py-4 bg-purple-600 text-white rounded-md m-2">Create</button>
+                <x-input-label for="name" class="mb-0">Product</x-input-label>
+                <x-text-input type="text" name="name" id="name" placeholder="Product">
+
+                </x-text-input>
+
+                <x-input-label for="Price" class="mb-0 mt-2">Price</x-input-label>
+                <x-text-input type="number" name="price" id="price" placeholder="Price">
+
+                </x-text-input>
+
+                <x-input-label for="images" class="mb-0 mt-2">Images</x-input-label>
+                <input type="file" name="images[]" id="images" onchange="handleFileUpload(event)" class="text-sm py-2 px-3 rounded-lg border border-accent-gray focus:ring-2 focus:ring-primary-orange focus:ring-offset-2" multiple>
+
+                <x-input-label for="description" class="mb-0 mt-2">Description</x-input-label>
+                <div class="flex flex-col py-2 px-3 rounded-lg border border-accent-gray focus-within:ring-2 focus-within:ring-primary-orange focus-within:ring-offset-2">
+                    <textarea name="description" id="description" placeholder="Description" class="h-36 text-sm resize-none outline-none focus bg-transparent placeholder:text-accent-gray placeholder:text-sm"></textarea>
+                    <x-primary-button class="self-end text-sm">{{ __('Create') }}</x-primary-button>
                 </div>
             </form>
         </div>
@@ -44,15 +52,15 @@
 
     <script>
         let swiperInstance; // Store Swiper instance for reuse
-
-        function handleFileUpload(event) {
-            const swiper = document.querySelector('.swiper');
-            const swiperWrapper = document.querySelector('.swiper-wrapper');
+        
+         window.handleFileUpload = function (event) {
+            const swiper = document.querySelector('.swiper')
+            const swiperWrapper = document.querySelector('.swiper-wrapper')
             const files = Array.from(event.target.files);
 
             if (!files.length) return;
 
-            // Remove existing slides and preview text
+            // Reset the slider
             swiperWrapper.innerHTML = '';
 
             // Add new slides
@@ -62,19 +70,18 @@
                 fileReader.readAsDataURL(file);
 
                 fileReader.onload = (img) => {
-                    const imgEl = document.createElement('img');
-                    imgEl.src = img.target.result;
-                    imgEl.classList.add('aspect-[1/1]', 'object-cover');
+                    const imgElement = document.createElement('img');
+                    imgElement.src = img.target.result;
+                    imgElement.classList.add('aspect-[1/1]', 'object-cover', 'object-center');
 
                     const swiperSlide = document.createElement('div');
                     swiperSlide.classList.add('swiper-slide');
-                    swiperSlide.appendChild(imgEl);
+                    swiperSlide.appendChild(imgElement);
 
                     swiperWrapper.appendChild(swiperSlide);
                 };
             });
 
-            // Reinitialize Swiper after slides are added
             setTimeout(() => {
                 if (swiperInstance) swiperInstance.destroy(); // Destroy previous instance
 
@@ -85,9 +92,10 @@
                         disableOnInteraction: true,
                     },
                     slidesPerView: 1,
+                    spaceBetween: 10,
                     navigation: {
-                        nextEl: '#btn-right',
-                        prevEl: '#btn-left',
+                        nextEl: '#btn-next',
+                        prevEl: '#btn-prev',
                     },
                 });
             }, 100);

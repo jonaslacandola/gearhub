@@ -1,21 +1,29 @@
-<div class="swiper relative flex flex-col gap-2 h-auto w-[260px] rounded-2xl">
+<div class="swiper relative flex flex-col h-auto w-[230px] rounded-xl shadow bg-background-light">
     <!-- Swiper container -->
     <div class="swiper-wrapper">
         @foreach(json_decode($product->images) as $imgURL)
             <!-- Each image must be inside a "swiper-slide" -->
             <div class="swiper-slide">
-                <img src="{{ asset('storage/' . $imgURL) }}" alt="{{ $product->name }}" class="aspect-square object-cover rounded-2xl">
+                <img src="{{ asset('storage/' . $imgURL) }}" alt="{{ $product->name }}" class="aspect-[3/2] object-cover">
             </div>
         @endforeach
     </div>
-    <div class="flex flex-col gap-1">
-        <div class="flex items-center gap-2">
-            <h1 class="text-xl font-semibold">{{ $product->name }}</h1>
-            <!-- <a href="{{route('product.show', $product->id)}}" class="p-2 rounded-full hover:bg-purple-100">
-                <i data-feather="arrow-up-right" class="stroke-purple-600 w-[18px] h-[18px]"></i>
-            </a> -->
-        </div>
-        <p class="text-slate-700 break-words line-clamp-2">{{ $product->description }}</p>
-        <p class="font-semibold text-purple-600">PHP {{ $product->price }}</p>
+    <div class="w-full flex flex-col items-center gap-1 p-4">
+        <h1 class="text-center text-lg font-semibold">{{ $product->name }}</h1>
+        <p class="text-center text-zinc-600 text-[12px] break-words line-clamp-2 w-[90%]">{{ $product->description }}</p>
+        <p class="font-medium text-center">${{ $product->price }}</p>
+    </div>
+    <div>
+        <form action="{{ route('cart.store', ['productId' => $product->id, 'quantity' => 1]) }}" method="post">
+            @csrf
+            <button type="submit" class="text-white text-sm text-center w-full bg-primary-orange p-4 active:bg-amber-700">
+               {{ __('Add to cart') }}
+            </button>
+        </form>
+    </div>
+    <div class="absolute top-2 right-2 z-10">
+        <button class="p-2 rounded-full bg-background-light active:bg-primary-orange">
+            <i data-feather="heart" class="w-[16px] h-[16px] stroke-primary-orange"></i>
+        </button>
     </div>
 </div>
