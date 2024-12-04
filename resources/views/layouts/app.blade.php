@@ -19,7 +19,7 @@
                 {{ $slot }}
             </main>
 
-        <script>
+        <script> 
             feather.replace();
         </script>
     </body>

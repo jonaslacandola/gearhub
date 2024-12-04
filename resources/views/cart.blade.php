@@ -10,17 +10,20 @@
                         <img src="{{ asset('storage/' . json_decode($product->images)[0]) }}" alt="{{ $product->name . ' ' . $product->description }}" class="aspect-square object-cover rounded-md w-24 h-24">
                         <div class="flex flex-col gap-2 w-3/4 line-clamp-2">
                             <p class="text-sm text-zinc-600">{{ $product->description }}</p>
-                            <p class="font-medium">
-                                <span class="text-primary-orange">
+                            <div class="flex justify-between items-center">
+                                <p class="text-primary-orange font-medium">
                                     ${{ $product->price }} 
+                                </p>
+                                <form class="flex items-center gap-4">
+                                    <button class="rounded bg-zinc-200 p-1 active:bg-zinc-300">
+                                        <i data-feather="minus" class="stroke-zinc-500 w-[16px] h-[16px]"></i>
+                                    </button>
+                                    <span class="text-sm">{{ $product->pivot->quantity }}</span>
+                                    <button class="rounded bg-zinc-200 p-1 active:bg-zinc-300">
+                                        <i data-feather="plus" class="stroke-zinc-500 w-[16px] h-[16px]"></i>
+                                    </button>
                                 </span>
-                                <span>
-                                    x 
-                                </span>
-                                <span>
-                                    {{ $product->pivot->quantity }}
-                                </span>
-                            </p>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -31,7 +34,7 @@
         @endisset
         <div class="w-full flex justify-end">
             <x-primary-button>
-                {{ __('Checkout') }}
+                {{ __('Check Out') }}
             </x-primary-button>
         </div>
     </div>
