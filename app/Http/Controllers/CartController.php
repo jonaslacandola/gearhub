@@ -63,4 +63,10 @@ class CartController extends Controller
     {
         //
     }
+
+    public function updateQuantityPivot($quantity, $product) {
+        $cart = Auth::user()->cart;
+
+        $cart->products()->updateExistingPivot($product, ['quantity' => $quantity]);
+    }
 }

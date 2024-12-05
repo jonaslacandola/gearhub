@@ -10,8 +10,6 @@ $class = ($active ?? false)
     <i data-feather="{{ $icon }}" class="stroke-zinc-600 w-[20px] h-[20px]"></i>
     {{ $slot }}
     @isset($count)
-        @if($count > 0)
-            <p class="absolute text-[8px] -top-2 -right-2 px-2 py-1 bg-red-600 text-red-50 rounded-full">{{ strval($count) }}</p>
-        @endif
+        <p class="absolute text-[8px] -top-2 -right-2 px-2 py-1 bg-red-600 text-red-50 rounded-full">{{ strval($count) }}</p>
     @endisset
 </a>

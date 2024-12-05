@@ -51,7 +51,7 @@ class ProductController extends Controller
                 "images" => json_encode($imagesPath)
             ]);
 
-            return redirect()->route('dashboard')->with('success', "Product " . strtoupper($validated["name"]) . " has been created");
+            return redirect()->route('feed')->with('success', "Product " . strtoupper($validated["name"]) . " has been created");
 
         } catch (Exception $error) {
             Log::error('create_error:', [$error->getMessage()]);

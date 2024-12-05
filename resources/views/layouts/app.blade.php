@@ -22,5 +22,6 @@
         <script> 
             feather.replace();
         </script>
+        @livewireScripts 
     </body>
 </html>
