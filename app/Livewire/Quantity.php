@@ -23,6 +23,8 @@ class Quantity extends Component
         $this->quantity += 1;
         
         $cart->updateQuantityPivot($this->quantity, $this->product);
+
+        $this->dispatch('quantity-updated');
     }
 
     public function decrement() {
@@ -31,6 +33,8 @@ class Quantity extends Component
         $this->quantity -= 1;
         
         $cart->updateQuantityPivot($this->quantity, $this->product);
+
+        $this->dispatch('quantity-updated');
     }
 
     public function render()

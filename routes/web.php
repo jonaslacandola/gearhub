@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\EnsurePaymentSuccess;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
@@ -18,50 +19,17 @@ Route::get('/', function (Request $request) {
     return view('feed', compact('products'));
 })->name('feed');
 
-Route::post('/checkout', function () {
-    Stripe::setApiKey(env('STRIPE_SECRET'));
+Route::post('/checkout', [CheckoutController::class, 'store'])->middleware(['auth', 'verified'])->name('checkout');
 
-    $products = Auth::user()->cart->products;
+Route::get('/success', [CheckoutController::class, 'success'])->middleware(['auth', 'verified', EnsurePaymentSuccess::class])->name('success');
 
-    $lineItems = $products->map(function ($product) {
-        return [
-            'price_data' => [
-                'currency' => 'php',
-                'product_data' => [
-                    'name' => $product->name,
-                ],
-                'unit_amount' => $product->price * 100,
-            ],
-            'quantity' => $product->pivot->quantity,
-        ];
-    })->toArray();
-
-    $session = Session::create([
-        'mode' => 'payment',
-        'payment_method_types' => ['card'],
-        'line_items' => $lineItems,
-        'metadata' => [
-            'name' => Auth::user()->name,
-            'email' => Auth::user()->email,
-        ],
-        'success_url' => route('feed'),
-        'cancel_url' => route('cart.index'),
-    ]);
-
-    Log::info('session', [$session]);
-
-    return redirect($session->url);
-    
-})->middleware(['auth', 'verified'])->name('checkout');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('product', ProductController::class)->middleware(['auth', 'verified']);
 
 Route::resource('cart', CartController::class)->middleware(['auth', 'verified']);
-
-Route::get('/dashboard', function () {
-
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

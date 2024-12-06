@@ -8,11 +8,6 @@
         <li class="w-3/6">
             <form id="searchbar" method="get" action="" class="flex items-center gap-2 pl-4 border border-accent-gray rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-primary-orange focus-within:ring-offset-2">
                 <input type="text" name="search" id="search" placeholder="Search a product" value="{{ request('search') }}" class="w-full border-none outline-none bg-transparent text-sm text-secondary-black placeholder:text-accent-gray placeholder:text-sm">
-                <!-- <select name="category" id="category" class="max-w-[30%] outline-none border-l border-accent-gray bg-transparent text-sm p-2 text-accent-gray">
-                    <option value="*" hidden selected>All Categories</option>
-                    <option value="">Clothes</option>
-                    <option value="">Electronics</option>
-                </select> -->
                 <button type="submit" class="bg-primary-orange py-2 px-6 active:bg-amber-700">
                     <i data-feather="search" class="w-[18px] h-[18px] stroke-white"></i>
                 </button>

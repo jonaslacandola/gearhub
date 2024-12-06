@@ -9,9 +9,9 @@
         @endforeach
     </div>
     <div class="w-full flex flex-col items-center gap-1 p-4">
-        <h1 class="text-center text-lg font-semibold">{{ $product->name }}</h1>
+        <h1 class="text-center text-lg font-semibold">{{ ucwords($product->name) }}</h1>
         <p class="text-center text-zinc-600 text-[12px] break-words line-clamp-2 w-[90%]">{{ $product->description }}</p>
-        <p class="font-medium text-center">${{ $product->price }}</p>
+        <p class="font-medium text-center">&#8369; {{ number_format($product->price, 2, '.', ',') }}</p>
     </div>
     <div>
         <form action="{{ route('cart.store', ['productId' => $product->id, 'quantity' => 1]) }}" method="post">
