@@ -12,7 +12,7 @@ class Quantity extends Component
     public $quantity = 0, $product;
 
     public function mount($quantity, $product)
-    {
+    {   
         $this->quantity = $quantity;
         $this->product = $product;
     }
@@ -22,19 +22,21 @@ class Quantity extends Component
     
         $this->quantity += 1;
         
-        $cart->updateQuantityPivot($this->quantity, $this->product);
+        $cart->updateQuantity($this->quantity, $this->product);
 
-        $this->dispatch('quantity-updated');
+        $this->dispatch('quantity-changed');
     }
 
     public function decrement() {
-        $cart = new CartController();
-    
-        $this->quantity -= 1;
-        
-        $cart->updateQuantityPivot($this->quantity, $this->product);
+        if ($this->quantity == 1) {
+            return;
+        }
 
-        $this->dispatch('quantity-updated');
+        $cart = new CartController();
+        $this->quantity -= 1;
+        $cart->updateQuantity($this->quantity, $this->product);
+
+        $this->dispatch('quantity-changed');
     }
 
     public function render()

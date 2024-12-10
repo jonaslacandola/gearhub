@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,8 @@ class EnsurePaymentSuccess
 
         if ($sessionId) {
             $session = Session::retrieve($sessionId);
+            Log::info('ad', [$session]);
+
             $paymentStatus = $session->payment_status;
 
             if ($paymentStatus === 'paid') {

@@ -10,7 +10,7 @@ class OrderSummary extends Component
 {   public $summary = [], $count = 0, $subTotal = 0;
     
     public function mount() {
-        $this->initiateSummary();
+        $this->renderSummary();
     }
     
     public function render()
@@ -18,8 +18,8 @@ class OrderSummary extends Component
         return view('livewire.order-summary');
     }
     
-    #[On('quantity-updated')]
-    public function initiateSummary() {
+    #[On('quantity-changed')]
+    public function renderSummary() {
         $products = Auth::user()->cart->products;
         
         $this->summary = $products->map(function ($product) {
