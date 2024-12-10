@@ -29,14 +29,15 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <div class="flex flex-col gap-2 text-sm px-4 py-2">
+                            <div class="flex flex-col gap-1 text-sm px-4 py-2">
                                 <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100">
-                                    <!-- <i data-feather="user" class="w-[18px] h-[18px] stroke-zinc-700"></i> -->
                                     <span class="text-zinc-700">{{ __('Profile') }}</span>
+                                </a>
+                                <a href="" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100">
+                                    <span class="text-zinc-700">{{ __('My Orders') }}</span>
                                 </a>
                                 <form method="post" action="{{ route('logout') }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100"> 
                                     @csrf
-                                    <!-- <i data-feather="log-out" class="w-[18px] h-[18px] stroke-zinc-700"></i> -->
                                     <button type="submit" class="text-zinc-700">
                                         {{ __('Logout') }}
                                     </button>

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -23,21 +24,19 @@ class EnsurePaymentSuccess
         $sessionId = $request->query('session_id');
 
         if ($sessionId) {
-            $session = Session::retrieve($sessionId);
-            Log::info('ad', [$session]);
+            try {
+                $session = Session::retrieve($sessionId);
+                $paymentStatus = $session->payment_status;
 
-            $paymentStatus = $session->payment_status;
+                if ($paymentStatus === 'paid') {
+                    $request->merge(['session' => $session]);
 
-            if ($paymentStatus === 'paid') {
-                $cart = Auth::user()->cart;
-
-                $cart->products()->detach();
-                
-                $request->merge(['session' => $session]);
-
-                return $next($request);
-            } else {
-                return redirect()->route('cart.index');
+                    return $next($request);
+                } else {
+                    return redirect()->route('cart.index');
+                }
+            } catch (Exception $err) {
+                return redirect()->route('feed')->with('error', 'This payment session does not exists!');
             }
         } else {
             return back();

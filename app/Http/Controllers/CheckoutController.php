@@ -56,6 +56,9 @@ class CheckoutController extends Controller
     }
 
     public function success(Request $request) {
+        $cart = Auth::user()->cart;
+                    
+        $cart->products()->detach();
         $session = $request->session;
 
         return view('success', compact('session'));

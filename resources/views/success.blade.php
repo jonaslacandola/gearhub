@@ -16,7 +16,7 @@
             @endforeach
         </p>
         <p class="text-zinc-600">Amount</p>
-        <p class="text-right text-primary-orange">&#8369; {{ number_format($session->amount_total, 2, '.', ',') }}</p>
+        <p class="text-right text-primary-orange">&#8369; {{ number_format($session->amount_total / 100, 2, '.', ',') }}</p>
         <p class="text-zinc-600">Name</p>
         <p class="text-right">{{ $session->customer_details->name }}</p>
         <p class="text-zinc-600">Email</p>
