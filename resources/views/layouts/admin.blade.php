@@ -13,7 +13,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="w-full h-screen bg-background-light antialiased">
-        @include('layouts.navigation')
+        @include('layouts.admin-navigation')
 
         <main class="max-w-[75%] mx-auto py-10 flex flex-col gap-16">
             {{ $slot }}
