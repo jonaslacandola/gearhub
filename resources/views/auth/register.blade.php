@@ -2,10 +2,8 @@
     <x-slot name="sideboard">
         <div class="absolute -top-12 rounded-3xl flex flex-col shadow-xl left-20 bg-background-light w-3/4 h-[86vh] overflow-hidden">
             <div class="h-full p-8">
-                <x-application-logo class=" text-4xl"/>
-                <h1 class="text-xl font-medium mb-2">Join the Crew!</h1>
-                <p class="text-zinc-600">Your one-stop solution for unbeatable deals</p>
-                <p class="text-zinc-600">Start your journey with us today!</p>
+                <h1 class="text-2xl font-semibold mb-2">Join GearHub Today!</h1>
+                <p class="text-zinc-600">Where quality meets affordability for all your hardware needs.</p>
             </div>
             <div class="self-end">
              <img src="{{asset('images/designlogin.png')}}" alt="" class="aspect-square object-cover object-center rounded-se-[50%]" >

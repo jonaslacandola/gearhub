@@ -9,8 +9,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Poppins, sans"],
-                borel: ["Borel, cursive"],
+                sans: ["Albert Sans, sans-serif"],
             },
             colors: {
                 "primary-orange": "#ff7811",

@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('uuid()'));
-            $table->string('category');
+            $table->string('name');
             $table->timestamps();
         });
     }

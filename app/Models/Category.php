@@ -10,10 +10,10 @@ class Category extends Model
     use HasUuids;
 
     protected $fillable = [
-        'category'
+        'name'
     ];
 
     public function products() {
-        $this->belongsToMany(Product::class, 'category_product', 'categoryId', 'productId');
+        return $this->hasMany(Product::class);
     }
 }

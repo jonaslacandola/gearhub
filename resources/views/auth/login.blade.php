@@ -2,10 +2,8 @@
     <x-slot name="sideboard">
         <div class="absolute -top-12 rounded-3xl flex flex-col shadow-xl left-20 bg-background-light w-3/4 h-[86vh] overflow-hidden">
             <div class="h-full p-8">
-                <x-application-logo class="text-3xl lg:text-4xl"/>
-                <h1 class="text-xl font-medium mb-2">Welcome Back!</h1>
-                <p class="text-zinc-600">A one ship solution for all offers</p>
-                <p class="text-zinc-600">Find everything in less price</p>
+                <h1 class="text-2xl font-semibold mb-2">Welcome Back!</h1>
+                <p class="text-zinc-600">Your one-stop shop for quality tools and hardware essentials.</p>
             </div>
             <div class="self-end">
              <img src="{{asset('images/designlogin.png')}}" alt="" class="aspect-square object-cover object-center rounded-se-[50%]" >
