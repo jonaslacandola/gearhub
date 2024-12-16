@@ -1,4 +1,4 @@
-<nav class="w-full sticky top-0 p-4 bg-background-light border-b border-accent-gray shadow-md z-50">
+<nav class="w-full sticky top-0 p-6 bg-zinc-50 border-b border-zinc-100 shadow-md z-50">
     <ul class="flex justify-between items-center gap-8 max-w-[85%] mx-auto">
         <li>
            <a href="{{ route('feed') }}">
@@ -6,9 +6,9 @@
            </a>
         </li>
         <li class="w-3/6">
-            <form id="searchbar" method="get" action="" class="flex items-center gap-2 pl-4 border border-accent-gray rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-primary-orange focus-within:ring-offset-2">
-                <input type="text" name="search" id="search" placeholder="Search an offer" value="{{ request('search') }}" class="w-full border-none outline-none bg-transparent text-sm text-secondary-black placeholder:text-accent-gray placeholder:text-sm">
-                <button type="submit" class="bg-primary-orange py-2 px-6 active:bg-amber-700">
+            <form id="searchbar" method="get" action="" class="flex items-center gap-2 pl-4 border border-zinc-300 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2">
+                <input type="text" name="search" id="search" placeholder="Search an offer" value="{{ request('search') }}" class="w-full border-none outline-none bg-transparent text-sm placeholder:text-zinc-300 placeholder:text-sm">
+                <button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-600 py-3 px-6 active:bg-amber-700">
                     <i data-feather="search" class="w-[18px] h-[18px] stroke-white"></i>
                 </button>
             </form>
@@ -17,8 +17,12 @@
             <div class="flex flex-cols items-center gap-2">
                 <x-nav-icon-link icon="bell" />
                 <x-nav-icon-link icon="heart" />
-                <x-nav-icon-link :href="route('cart.index')" :active="request()->routeIs('cart.index')" icon="shopping-cart" :count="$itemsInCart" />
-            </div>
+                @isset (Auth::user()->cart)
+                    <x-nav-icon-link :href="route('cart.show', ['cart' => Auth::user()->cart->id])" :active="request()->routeIs('cart.show', ['cart' => Auth::user()->cart->id])" icon="shopping-cart" :count="$itemsInCart" />
+                @else
+                    <x-nav-icon-link icon="shopping-cart" href="{{ route('login') }}" />
+                @endisset
+                </div>
         </li>
         <li class="justify-self-end flex flex-cols items-center gap-8">
             <div>
@@ -33,7 +37,7 @@
                                 <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100">
                                     <span class="text-zinc-700">{{ __('Profile') }}</span>
                                 </a>
-                                <a href="" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100">
+                                <a href="{{ route('order.index') }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100">
                                     <span class="text-zinc-700">{{ __('My Orders') }}</span>
                                 </a>
                                 <form method="post" action="{{ route('logout') }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100"> 
@@ -46,7 +50,7 @@
                         </x-slot>
                     </x-dropdown>
                 @else 
-                    <a href="{{ route('login') }}" class="text-sm text-center px-4 py-2 bg-primary-orange border border-transparent rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary-orange focus:ring-offset-2">
+                    <a href="{{ route('login') }}" class="text-sm text-center px-4 py-2 bg-orange-500 border border-transparent rounded-md text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                         {{ __('Register / Login') }}
                     </a>
                 @endif

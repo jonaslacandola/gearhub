@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-slot name="sideboard">
-        <div class="absolute -top-12 rounded-3xl flex flex-col shadow-xl left-20 bg-background-light w-3/4 h-[86vh] overflow-hidden">
+        <div class="absolute -top-12 rounded-3xl flex flex-col shadow-xl left-20 bg-white w-3/4 h-[86vh] overflow-hidden">
             <div class="h-full p-8">
-                <h1 class="text-2xl font-semibold mb-2">Welcome Back!</h1>
+                <h1 class="text-3xl font-medium mb-2">Welcome Back</h1>
                 <p class="text-zinc-600">Your one-stop shop for quality tools and hardware essentials.</p>
             </div>
             <div class="self-end">
@@ -25,7 +25,7 @@
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="w-full" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus autocomplete="username" >
-                <i data-feather="user" class="w-[18px] h-[18px]"></i>
+                <i data-feather="mail" class="w-[18px] h-[18px]"></i>
             </x-text-input>
             <x-input-error :messages="$errors->get('email')" class="" />
         </div>
@@ -44,12 +44,12 @@
         <!-- Remember Me & Forgot Password -->
         <div class="flex items-center justify-between"> 
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 accent-primary-orange shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange" name="remember">
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 accent-orange-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" name="remember">
                 <span class="ms-2 text-sm text-zinc-600">{{ __('Remember me') }}</span>
             </label>
 
             @if (Route::has('password.request'))
-                <a class="text-sm text-zinc-600 hover:text-zinc-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange" href="{{ route('password.request') }}">
+                <a class="text-sm text-zinc-600 hover:text-zinc-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" href="{{ route('password.request') }}">
                     {{ __('Forgot Password?') }}
                 </a>
             @endif
@@ -62,9 +62,9 @@
         </div>
 
         <div class="flex justify-center">
-            <a href="{{ route('register') }}" class="text-center  text-sm rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange">
+            <a href="{{ route('register') }}" class="text-center  text-sm rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
                 <span class="text-zinc-500">New User?</span>
-                <span class="text-primary-orange">Create an Account</span>
+                <span class="text-orange-500">Create an Account</span>
             </a>
         </div>
     </form>

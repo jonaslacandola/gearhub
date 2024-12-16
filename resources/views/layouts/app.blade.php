@@ -12,10 +12,10 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="w-full h-screen bg-background-light antialiased">
+    <body class="w-full h-screen bg-zinc-50 antialiased">
         @include('layouts.navigation')
 
-        <main class="max-w-[75%] mx-auto py-10 flex flex-col gap-16">
+        <main class="w-full max-w-[85%] mx-auto py-10 flex flex-col gap-16">
             {{ $slot }}
         </main>
 

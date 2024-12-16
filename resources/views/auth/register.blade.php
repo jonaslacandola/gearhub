@@ -1,6 +1,6 @@
 <x-guest-layout>
     <x-slot name="sideboard">
-        <div class="absolute -top-12 rounded-3xl flex flex-col shadow-xl left-20 bg-background-light w-3/4 h-[86vh] overflow-hidden">
+        <div class="absolute -top-12 rounded-3xl flex flex-col shadow-xl left-20 bg-white w-3/4 h-[86vh] overflow-hidden">
             <div class="h-full p-8">
                 <h1 class="text-2xl font-semibold mb-2">Join GearHub Today!</h1>
                 <p class="text-zinc-600">Where quality meets affordability for all your hardware needs.</p>
@@ -65,7 +65,7 @@
         </div>
 
         <div class="flex items-center justify-end my-4">
-            <a class="text-sm text-zinc-600 hover:text-zinc-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-orange" href="{{ route('login') }}">
+            <a class="text-sm text-zinc-600 hover:text-zinc-800 rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500" href="{{ route('login') }}">
                 {{ __('Already Registered?') }}
             </a>    
         </div>

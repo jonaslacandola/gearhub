@@ -10,24 +10,6 @@ use Illuminate\Support\Facades\Log;
 class CartController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {   
-        $cart = Auth::user()->cart;
-
-        if (!$cart) {
-            $cart = Cart::create([
-                "userId" => Auth::id()
-            ]);
-        }
-
-        $products = $cart->products;
-
-        return view('cart', compact('products'));
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -54,6 +36,17 @@ class CartController extends Controller
         }
 
         return back()->with('success', 'Product successfully added to cart!');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Cart $cart)
+    {   
+        Log::info($cart);
+        $products = $cart->products;
+
+        return view('cart', compact('products'));
     }
 
     /**

@@ -9,13 +9,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Albert Sans, sans-serif"],
-            },
-            colors: {
-                "primary-orange": "#ff7811",
-                "secondary-black": "#1b1b1b",
-                "background-light": "#fafafa",
-                "accent-gray": "#e8e8e8",
+                sans: ["Poppins, sans-serif"],
             },
         },
     },

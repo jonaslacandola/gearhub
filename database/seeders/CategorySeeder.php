@@ -14,13 +14,13 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::insert([
-            ['category' => 'Fasteners'],
-            ['category' => 'Power Tools'],
-            ['category' => 'Hand Tools'],
-            ['category' => 'Varnishes and Paints'],
-            ['category' => 'Building Materials'],
-            ['category' => 'Supplies'],
-            ['category' => 'Safety Equipment'],
+            ['name' => 'Fasteners'],
+            ['name' => 'Power Tools'],
+            ['name' => 'Hand Tools'],
+            ['name' => 'Varnishes and Paints'],
+            ['name' => 'Building Materials'],
+            ['name' => 'Supplies'],
+            ['name' => 'Safety Equipment'],
         ]);
     }
 }

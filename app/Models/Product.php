@@ -10,14 +10,18 @@ class Product extends Model
     use HasUuids;
 
     protected $fillable = [
-        'name', 'description', 'price', 'images', 'category'
+        'name', 'description', 'price', 'images', 'categoryId'
     ];
 
     public function carts() {
         return $this->belongsToMany(Cart::class, 'cart_product', 'productId', 'cartId')->withPivot('quantity');
     }
 
+    public function orders() {
+        return $this->belongsToMany(Order::class, 'order_product', 'productId', 'orderId')->withPivot('quantity');
+    }
+
     public function category() {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'categoryId');
     }
 }

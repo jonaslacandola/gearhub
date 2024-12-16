@@ -12,14 +12,14 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="w-full h-screen flex items-center bg-accent-gray antialiased">
+    <body class="w-full h-screen flex items-center bg-zinc-50 antialiased">
         <div class="w-3/4 h-3/4 shadow-2xl rounded-3xl mx-auto flex flex-cols items-center gap-10 bg-background-light">
             @isset($sideboard)
-                <div class="relative h-full w-full rounded-s-3xl bg-primary-orange">
+                <div class="relative h-full w-full rounded-s-3xl bg-gradient-to-b from-orange-500 to-orange-600">
                     {{ $sideboard }}
                 </div>
             @endisset
-            <div class="flex justify-center w-full ">
+            <div class="flex justify-center w-full">
                 {{ $slot }}
             </div>
         </div>

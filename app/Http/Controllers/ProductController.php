@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,7 +16,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $categories = Category::all();
+
+        return view('product.create', compact('categories'));
     }
 
     /**
@@ -28,6 +31,7 @@ class ProductController extends Controller
                 "name" => "required|string|max:255",
                 "description" => "required|string",
                 "price" => "required|numeric",
+                "category" => "required|exists:categories,id",
                 "images" => "required|array",
                 "images.*" => "image|mimes:jpeg,png,jpg|max:4048"
             ]);
@@ -48,6 +52,7 @@ class ProductController extends Controller
                 "name" => $validated["name"],
                 "description" => $validated["description"],
                 "price" => $validated["price"],
+                "categoryId" => $validated["category"],
                 "images" => json_encode($imagesPath)
             ]);
 
