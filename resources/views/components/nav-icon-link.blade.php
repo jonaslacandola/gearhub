@@ -1,4 +1,4 @@
-@props(['active', 'icon', 'count'])
+@props(['active', 'icon'])
 
 @php
 $class = ($active ?? false) 
@@ -9,7 +9,4 @@ $class = ($active ?? false)
 <a {{$attributes->merge(['class' => $class])}}>
     <i data-feather="{{ $icon }}" class="stroke-zinc-600 w-[20px] h-[20px]"></i>
     {{ $slot }}
-    @isset($count)
-        <p class="absolute text-[10px] -top-2 -right-2 px-2 py-1 bg-red-600 text-red-50 rounded-full">{{ strval($count) }}</p>
-    @endisset
 </a>

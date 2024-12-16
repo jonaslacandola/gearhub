@@ -24,7 +24,7 @@ class Quantity extends Component
         
         $cart->updateQuantity($this->quantity, $this->product);
 
-        $this->dispatch('quantity-changed');
+        $this->dispatch('quantity/changed');
     }
 
     public function decrement() {
@@ -36,7 +36,7 @@ class Quantity extends Component
         $this->quantity -= 1;
         $cart->updateQuantity($this->quantity, $this->product);
 
-        $this->dispatch('quantity-changed');
+        $this->dispatch('quantity/changed');
     }
 
     public function render()

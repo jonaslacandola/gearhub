@@ -18,7 +18,7 @@ class OrderSummary extends Component
         return view('livewire.order-summary');
     }
     
-    #[On('quantity-changed')]
+    #[On('quantity/changed')]
     public function renderSummary() {
         $products = Auth::user()->cart->products;
         
@@ -30,9 +30,11 @@ class OrderSummary extends Component
                 'totalPrice' => $product->price * $product->pivot->quantity,
             ];
         });
+
         $this->subTotal = array_reduce($products->toArray(), function ($ctr, $itm) {
             return $ctr += $itm['price'] * $itm['pivot']['quantity'];
         }, 0);
+        
         $this->count = count($products);
     }
 }

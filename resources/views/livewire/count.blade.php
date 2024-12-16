@@ -1,0 +1,1 @@
+<p class="absolute text-[10px] -top-2 -right-2 px-2 py-[2px] bg-red-600 text-red-50 rounded-full">{{ strval($count) }}</p>

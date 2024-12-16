@@ -14,28 +14,9 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'productId' => 'required|string|exists:products,id',
-            'quantity' => 'required|integer'
-        ]);
+        
 
-        $cart = Auth::user()->cart;
-
-        if (!$cart) {
-            $cart = Cart::create([
-                "userId" => Auth::id()
-            ]);
-        }
-
-        $inCartProducts = $cart->products()->where('productId', $validated['productId'])->get();
-
-        if (count($inCartProducts)) {
-            $cart->products()->updateExistingPivot($validated['productId'], ['quantity' => $inCartProducts[0]->pivot->quantity + 1]);
-        } else {
-            $cart->products()->attach($validated['productId'], ['quantity' => $validated['quantity']]);
-        }
-
-        return back()->with('success', 'Product successfully added to cart!');
+        return;
     }
 
     /**
@@ -54,12 +35,16 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        $cart->products()->detach($request->productId);
+
+        return back();
     }
 
     public function updateQuantity($quantity, $product) {
         $cart = Auth::user()->cart;
 
         $cart->products()->updateExistingPivot($product, ['quantity' => $quantity]);
+
+        return;
     }
 }

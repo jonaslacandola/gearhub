@@ -17,7 +17,7 @@
             </div>
             <div class="flex flex-wrap gap-4">
                 @forelse ($products as $product) 
-                    <x-product-card :product="$product"/>
+                    <livewire:product-card :product="$product"/>
                 @empty
                     <p class="w-full text-center text-zinc-400 text-sm">Oops! No products found. Try a different search or other categories</p>
                 @endforelse

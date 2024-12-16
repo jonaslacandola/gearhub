@@ -18,7 +18,9 @@
                 <x-nav-icon-link icon="bell" />
                 <x-nav-icon-link icon="heart" />
                 @isset (Auth::user()->cart)
-                    <x-nav-icon-link :href="route('cart.show', ['cart' => Auth::user()->cart->id])" :active="request()->routeIs('cart.show', ['cart' => Auth::user()->cart->id])" icon="shopping-cart" :count="$itemsInCart" />
+                    <x-nav-icon-link icon="shopping-cart" :href="route('cart.show', ['cart' => Auth::user()->cart->id])" :active="request()->routeIs('cart.show', ['cart' => Auth::user()->cart->id])" >
+                        <livewire:count/>
+                    </x-nav-icon-link>
                 @else
                     <x-nav-icon-link icon="shopping-cart" href="{{ route('login') }}" />
                 @endisset

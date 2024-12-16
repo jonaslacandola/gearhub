@@ -75,6 +75,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(CartController::class)->group(function () {
         Route::post('/cart', 'store')->name('cart.store');
         Route::get('/cart/{cart}', 'show')->name('cart.show');
+        Route::put('/cart/{cart}', 'update')->name('cart.update');
     });
 });
 
