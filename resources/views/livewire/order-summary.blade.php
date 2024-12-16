@@ -1,4 +1,4 @@
-<div class="sticky w-[70%] top-40 max-h-[346px] flex flex-col px-8 py-6 gap-4 rounded-xl shadow">
+<div class="sticky w-full top-32 max-h-[446px] flex flex-col px-8 py-6 gap-4 rounded-xl shadow">
     <h1 class="text-lg">Order Summary</h1>
     <div class="w-full h-full flex flex-col gap-2 overflow-y-scroll">
         @foreach ($summary as $item) 

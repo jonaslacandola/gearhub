@@ -59,9 +59,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
     
-    Route::resource('product', ProductController::class)->middleware(['auth', 'verified']);
+    Route::resource('product', ProductController::class);
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/product/create', 'create')->name('product.create'); // Show the form for creating a new resource.
+        Route::post('/product', 'store')->name('product.store'); // Store a newly created resource in storage.
+        Route::get('/product/{product}', 'show')->name('product.show')->withoutMiddleware(['auth', 'verified']); // Display the specified resource.
+        Route::get('/product/{product}/edit', 'edit')->name('product.edit'); // Show the form for editing the specified resource.
+        Route::put('/product/{product}', 'update')->name('product.update'); // Update the specified resource in storage.
+        Route::delete('/product/{product}/delete', 'destroy')->name('product.delete'); // Remove the specified resource from storage.
+    });
 
-    Route::resource('order', OrderController::class)->middleware(['auth', 'verified']);
+    Route::resource('order', OrderController::class);
     Route::post('/order/{order}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 
     Route::controller(CartController::class)->group(function () {

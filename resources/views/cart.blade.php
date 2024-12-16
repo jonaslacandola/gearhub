@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-8">
         @isset($products)
             @if (count($products))
-                <div class="relative flex gap-8">
+                <div class="relative grid grid-cols-[1fr_0.6fr] gap-8">
                     <div class="w-full flex flex-col gap-4">
                         @foreach ($products as $product)
                             <x-cart-card :product="$product" />

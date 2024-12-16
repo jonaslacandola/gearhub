@@ -19,7 +19,7 @@
                 @forelse ($products as $product) 
                     <x-product-card :product="$product"/>
                 @empty
-                    <p class="w-full text-center text-zinc-400 text-sm">Sorry, there are no offers available</p>
+                    <p class="w-full text-center text-zinc-400 text-sm">Oops! No products found. Try a different search or other categories</p>
                 @endforelse
             </div>
         </div>

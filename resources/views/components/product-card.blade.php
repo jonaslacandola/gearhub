@@ -1,11 +1,11 @@
-<div class="swiper relative flex flex-col h-auto w-[230px] rounded-xl shadow bg-zinc-50 opacity-0">
+<div class="swiper relative flex flex-col h-auto w-[230px] rounded-xl shadow bg-zinc-50 opacity-0 cursor-pointer" onclick="window.location='{{route('product.show', ['product' => $product->id]) }}'">
     <!-- Swiper container -->
     <div class="swiper-wrapper">
         @foreach(json_decode($product->images) as $imgURL)
-            <!-- Each image must be inside a "swiper-slide" -->
-            <div class="swiper-slide">
-                <img src="{{ asset('storage/' . $imgURL) }}" alt="{{ $product->name }}" class="aspect-[3/2] object-cover">
-            </div>
+        <!-- Each image must be inside a "swiper-slide" -->
+        <div class="swiper-slide">
+            <img src="{{ asset('storage/' . $imgURL) }}" alt="{{ $product->name }}" class="aspect-[3/2] object-cover">
+        </div>
         @endforeach
     </div>
     <div class="w-full h-full grid grid-rows-[2rem_1fr_2rem_2rem] gap-1 p-4">
@@ -18,7 +18,7 @@
         <form action="{{ route('cart.store', ['productId' => $product->id, 'quantity' => 1]) }}" method="post">
             @csrf
             <button type="submit" class="text-white text-sm text-center w-full bg-gradient-to-r from-orange-500 to-orange-600 p-4 active:from-orange-600 active:to-orange-700">
-               {{ __('Add to cart') }}
+                {{ __('Add to cart') }}
             </button>
         </form>
     </div>
