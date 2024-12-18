@@ -41,7 +41,7 @@
                 </form>
             </div>
         @empty
-
+            <p class="text-sm text-zinc-400 text-center">You have no order history</p>
         @endforelse
     </div>
 </x-app-layout>

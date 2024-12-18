@@ -6,8 +6,8 @@
            </a>
         </li>
         <li class="w-3/6">
-            <form id="searchbar" method="get" action="" class="flex items-center gap-2 pl-4 border border-zinc-300 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2">
-                <input type="text" name="search" id="search" placeholder="Search an offer" value="{{ request('search') }}" class="w-full border-none outline-none bg-transparent text-sm placeholder:text-zinc-300 placeholder:text-sm">
+            <form id="searchbar" method="get" action="{{ route('feed') }}" class="flex items-center gap-2 pl-4 border border-zinc-300 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2">
+                <input type="text" name="search" id="search" placeholder="Search a product" value="{{ request('search') }}" class="w-full border-none outline-none bg-transparent text-sm placeholder:text-zinc-300 placeholder:text-sm">
                 <button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-600 py-3 px-6 active:bg-amber-700">
                     <i data-feather="search" class="w-[18px] h-[18px] stroke-white"></i>
                 </button>

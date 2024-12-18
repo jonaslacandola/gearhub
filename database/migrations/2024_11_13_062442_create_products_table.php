@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 10, 2);
-            $table->json('images')->nullable(true);
+            $table->integer('stock')->default(0);
+            $table->json('images');
             $table->timestamps();
         });
     }

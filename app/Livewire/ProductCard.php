@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Cart;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -26,13 +27,19 @@ class ProductCard extends Component
     }
 
     public function store()
-    {   
-        $cart = Auth::user()->cart;
+    {      
+        try {
 
-        if (!$cart) {
-            $cart = Cart::create([
-                "userId" => Auth::id()
-            ]);
+            $cart = Auth::user()->cart;
+            
+            if (!$cart) {
+                $cart = Cart::create([
+                    "userId" => Auth::id()
+                ]);
+            }
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return redirect(route('login'));
         }
 
         $product = $cart->products()->where('productId', $this->product->id)->first();

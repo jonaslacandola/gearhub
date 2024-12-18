@@ -8,8 +8,8 @@
         </div>
         @endforeach
     </div>
-    <div class="w-full h-full grid grid-rows-[2rem_1fr_2rem_2rem] gap-1 p-4">
-        <h1 class="text-lg font-semibold">{{ ucwords($product->name) }}</h1>
+    <div class="w-full h-full grid grid-rows-[3rem_1fr_2rem_2rem] gap-1 p-4">
+        <h1 class="line-clamp-2 font-semibold">{{ ucwords($product->name) }}</h1>
         <p class="text-zinc-600 text-[12px] break-words w-[90%] line-clamp-2 text-">{{ $product->description }}</p>
         <p class="font-medium text-lg">&#8369; {{ number_format($product->price, 2, '.', ',') }}</p>
         <p class="text-center justify-self-start self-center text-[12px] text-zinc-500 bg-zinc-200 rounded-md px-2 py-1">{{ $product->category->name }}</p>

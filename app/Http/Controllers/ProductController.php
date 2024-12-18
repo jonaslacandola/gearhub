@@ -10,15 +10,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
-{
+{   
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      */
-    public function create()
-    {
+    public function index(Request $request)
+    {   $search = $request->input('search');
+        
+        $query = Product::query();
         $categories = Category::all();
 
-        return view('product.create', compact('categories'));
+        if ($search) {
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $products = $query->get();
+
+        return view('product.index', compact('products', 'categories', 'search'));
     }
 
     /**
@@ -31,6 +39,7 @@ class ProductController extends Controller
                 "name" => "required|string|max:255",
                 "description" => "required|string",
                 "price" => "required|numeric",
+                "stock" => "required|numeric",
                 "category" => "required|exists:categories,id",
                 "images" => "required|array",
                 "images.*" => "image|mimes:jpeg,png,jpg|max:4048"
@@ -52,11 +61,12 @@ class ProductController extends Controller
                 "name" => $validated["name"],
                 "description" => $validated["description"],
                 "price" => $validated["price"],
+                "stock" => $validated["stock"],
                 "categoryId" => $validated["category"],
                 "images" => json_encode($imagesPath)
             ]);
 
-            return redirect()->route('feed')->with('success', "Product " . strtoupper($validated["name"]) . " has been created");
+            return redirect()->back()->with('success', "Product " . strtoupper($validated["name"]) . " has been created");
 
         } catch (Exception $error) {
             Log::error('create_error:', [$error->getMessage()]);

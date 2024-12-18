@@ -12,17 +12,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
-use function PHPSTORM_META\map;
-
 Route::get('/', function (Request $request) {
     $categories = Category::all();
 
     $search = $request->input('search');
-    $filter = collect($request->all())->map(function ($value, $key) {
-        if ($key != 'min_price' || $key != 'max_price') {
-            return $value;
-        }
-    })->filter()->toArray();
+    
+    $filter = collect($request->all())->except(['min_price', 'max_price', 'search'])->filter()->toArray();
+
     $minPrice = $request->input('min_price');
     $maxPrice = $request->input('max_price');
 
@@ -52,22 +48,25 @@ Route::get('/', function (Request $request) {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-
     Route::get('/success', [CheckoutController::class, 'success'])->middleware([EnsurePaymentSuccess::class])->name('success');
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
     
-    Route::resource('product', ProductController::class);
+    Route::get('/admin', function () {
+        return redirect()->route('admin.overview');
+    })->name('admin');
+
+    Route::get('/admin/overview', function () {
+        return view('admin.overview');
+    })->name('admin.overview');
+    
     Route::controller(ProductController::class)->group(function () {
-        Route::get('/product/create', 'create')->name('product.create'); // Show the form for creating a new resource.
-        Route::post('/product', 'store')->name('product.store'); // Store a newly created resource in storage.
-        Route::get('/product/{product}', 'show')->name('product.show')->withoutMiddleware(['auth', 'verified']); // Display the specified resource.
-        Route::get('/product/{product}/edit', 'edit')->name('product.edit'); // Show the form for editing the specified resource.
-        Route::put('/product/{product}', 'update')->name('product.update'); // Update the specified resource in storage.
-        Route::delete('/product/{product}/delete', 'destroy')->name('product.delete'); // Remove the specified resource from storage.
+        Route::get('/admin/product', 'index')->name('admin.product.index'); // Display a listing of the resource.
+        Route::post('/admin/product', 'store')->name('admin.product.store'); // Store a newly created resource in storage.
+        Route::get('/admin/product/{product}/edit', 'edit')->name('admin.product.edit'); // Show the form for editing the specified resource.
+        Route::put('/admin/product/{product}', 'update')->name('admin.product.update'); // Update the specified resource in storage.
+        Route::delete('/admin/product/{product}/delete', 'destroy')->name('admin.product.delete'); // Remove the specified resource from storage.
     });
+
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show')->withoutMiddleware(['auth', 'verified']); // Display the specified resource.
 
     Route::resource('order', OrderController::class);
     Route::post('/order/{order}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');

@@ -10,7 +10,7 @@ class Product extends Model
     use HasUuids;
 
     protected $fillable = [
-        'name', 'description', 'price', 'images', 'categoryId'
+        'name', 'description', 'price', 'stock', 'images', 'categoryId'
     ];
 
     public function carts() {

@@ -38,7 +38,7 @@
                 </div>
         </div>
 
-        <div id="password-confirm" class="hidden flex-col gap-4">
+        <div id="password-confirm" class="hidden opacity-0 flex-col gap-4">
             <p class="text-sm text-zinc-600">Set a strong password and confirm it—we believe in your creativity!</p>
 
             <!-- Password -->
@@ -88,18 +88,14 @@
             function nextHandler(event) {
                 event.preventDefault();
 
-                animate('#name-email', { opacity: 0 }, { duration: 1 });
-                animate('#next', { opacity: 0 }, { duration: 1 });
+                animate('#name-email', { opacity: 0, display: 'none' }, { duration: 1 });
+                animate('#next', { opacity: 0, display: 'none' }, { duration: 1 });
 
                 delay(() => {
-                    document.querySelector('#name-email').classList.replace('flex', 'hidden');
-                    document.querySelector('#next').classList.add('hidden');
-
-                    animate('#password-confirm', { opacity: 1 }, { duration: 1 })
-                    delay(() => {
-                        document.querySelector('#password-confirm').classList.replace('hidden', 'flex');
-                        document.querySelector('#submit').classList.replace('hidden', 'block');
-                    }, 1)
+                    animate('#password-confirm', { opacity: [0, 1] }, { duration: 1 })
+                    animate('#submit', { opacity: [0, 1] }, { duration: 1 })
+                    document.querySelector('#password-confirm').classList.replace('hidden', 'flex');
+                    document.querySelector('#submit').classList.replace('hidden', 'flex');
                 }, 1)
             }
 
