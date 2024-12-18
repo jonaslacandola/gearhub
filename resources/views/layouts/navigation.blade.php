@@ -42,6 +42,9 @@
                                 <a href="{{ route('order.index') }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100">
                                     <span class="text-zinc-700">{{ __('My Orders') }}</span>
                                 </a>
+                                <a href="{{ route('admin') }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100">
+                                    <span class="text-zinc-700">{{ __('Manage Products') }}</span>
+                                </a>
                                 <form method="post" action="{{ route('logout') }}" class="flex items-center gap-2 p-2 rounded-md hover:bg-zinc-100"> 
                                     @csrf
                                     <button type="submit" class="text-zinc-700">

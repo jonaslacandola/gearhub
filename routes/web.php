@@ -7,7 +7,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\EnsurePaymentSuccess;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -55,7 +57,37 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('admin');
 
     Route::get('/admin/overview', function () {
-        return view('admin.overview');
+        $users = User::all()->count();
+        $products = Product::all()->count();
+        $sales = Order::where('status', 'complete')->count();
+        $revenue = Order::where('status', 'complete')->sum('total') / 100;
+        $refunds = Order::where('status', 'refunded')->count();
+        $sales_return = Order::where('status', 'refunded')->sum('total') / 100;
+
+        $categories = Category::all();
+        $revenuePerCategory = [];
+
+        foreach ($categories as $category) {
+            $categoryRevenue = Order::where('status', 'complete')
+                ->whereHas('products', function ($query) use ($category) {
+                    $query->where('categoryId', $category->id);
+                })
+                ->get()
+                ->reduce(function ($total, $order) use ($category) {
+                    $categoryTotal = $order->products
+                        ->where('categoryId', $category->id)
+                        ->sum(function ($product) {
+                            return $product->price * $product->pivot->quantity; 
+                        });
+                    return $total + $categoryTotal;
+                }, 0);
+        
+            $revenuePerCategory[$category->name] = $categoryRevenue;
+        }
+
+        Log::info($revenuePerCategory);
+
+        return view('admin.overview', compact('users', 'products', 'sales', 'revenue', 'refunds', 'sales_return', 'revenuePerCategory'));
     })->name('admin.overview');
     
     Route::controller(ProductController::class)->group(function () {
